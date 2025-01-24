@@ -20,7 +20,7 @@ import {
 import { Avatar, AvatarFallback, AvatarImage } from "~/components/ui/avatar";
 
 export default function Home() {
-  const [masturbates] = api.masturbate.getAll.useSuspenseQuery();
+  const { data: masturbates } = api.masturbate.getAll.useQuery();
 
   const utils = api.useUtils();
   const router = useRouter();
@@ -34,13 +34,12 @@ export default function Home() {
 
   const mutation = api.masturbate.create.useMutation({
     onSuccess: async () => {
-      console.log("success");
       await utils.masturbate.invalidate();
     },
   });
 
   return (
-    <div className="container mx-auto p-10 mt-48">
+    <div className="container mx-auto mt-48 p-10">
       <div className="mb-6 flex items-center justify-between">
         <h1 className="text-3xl font-bold">Masturbation Calculator</h1>
         <div className="flex gap-4">
@@ -116,28 +115,40 @@ export default function Home() {
               </TabsList>
               <TabsContent value="day">
                 <PostChart
-                  data={masturbates.map((val) => ({
-                    count: day!,
-                    createdAt: val.createdAt,
-                  }))}
+                  data={
+                    masturbates?.length
+                      ? masturbates.map((val) => ({
+                          count: day!,
+                          createdAt: val.createdAt,
+                        }))
+                      : []
+                  }
                   period="day"
                 />
               </TabsContent>
               <TabsContent value="month">
                 <PostChart
-                  data={masturbates.map((val) => ({
-                    count: month!,
-                    createdAt: val.createdAt,
-                  }))}
+                  data={
+                    masturbates?.length
+                      ? masturbates.map((val) => ({
+                          count: month!,
+                          createdAt: val.createdAt,
+                        }))
+                      : []
+                  }
                   period="month"
                 />
               </TabsContent>
               <TabsContent value="year">
                 <PostChart
-                  data={masturbates.map((val) => ({
-                    count: year!,
-                    createdAt: val.createdAt,
-                  }))}
+                  data={
+                    masturbates?.length
+                      ? masturbates.map((val) => ({
+                          count: year!,
+                          createdAt: val.createdAt,
+                        }))
+                      : []
+                  }
                   period="year"
                 />
               </TabsContent>

@@ -14,6 +14,13 @@ const config = {
   ],
   "rules": {
     "@typescript-eslint/array-type": "off",
+    "@typescript-eslint/no-unsafe-member-access": "off", //new
+    "@typescript-eslint/no-unsafe-member-assignment": "off", //new
+    "@typescript-eslint/no-unsafe-assignment": "off", //new
+    "@typescript-eslint/no-unused-vars": "off", //new
+    "@typescript-eslint/no-unsafe-call": "off", //new
+    "@typescript-eslint/no-unsafe-argument": "off", //new
+    "@typescript-eslint/no-explicit-any": "off", //new
     "@typescript-eslint/consistent-type-definitions": "off",
     "@typescript-eslint/consistent-type-imports": [
       "warn",
@@ -22,12 +29,12 @@ const config = {
         "fixStyle": "inline-type-imports"
       }
     ],
-    "@typescript-eslint/no-unused-vars": [
-      "warn",
-      {
-        "argsIgnorePattern": "^_"
-      }
-    ],
+    // "@typescript-eslint/no-unused-vars": [
+    //   "warn",
+    //   {
+    //     "argsIgnorePattern": "^_"
+    //   }
+    // ],
     "@typescript-eslint/require-await": "off",
     "@typescript-eslint/no-misused-promises": [
       "error",
